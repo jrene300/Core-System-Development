@@ -1,5 +1,4 @@
 #include "ReservationManager.h"
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -96,7 +95,7 @@ void ReservationManager::loadReservations(string filename) {
             reservationDate
         );
 
-        // Adds the reservation to the vector.
+        // Adds the reservation to the linked list.
         reservations.push_back(reservation);
     }
 
@@ -305,7 +304,7 @@ void ReservationManager::createReservation() {
         reservationDate
     );
 
-    // Adds the reservation to the vector.
+    // Adds the reservation to the linked list.
     reservations.push_back(reservation);
 
     cout << "Reservation created successfully!"
@@ -324,14 +323,16 @@ void ReservationManager::cancelReservation() {
     cout << "Enter Reservation ID: ";
     cin >> reservationID;
 
-    // Searches through the reservations.
-    for (int i = 0; i < reservations.size(); i++) {
+    // Searches through the linked list.
+    for (auto it = reservations.begin();
+         it != reservations.end();
+         ++it) {
 
         // Checks if the reservation ID matches.
-        if (reservations[i].getReservationID() == reservationID) {
+        if (it->getReservationID() == reservationID) {
 
-            // Removes the reservation from the vector.
-            reservations.erase(reservations.begin() + i);
+            // Removes the reservation from the linked list.
+            reservations.erase(it);
 
             cout << "Reservation cancelled successfully!"
                  << endl;
